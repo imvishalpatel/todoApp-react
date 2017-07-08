@@ -2,8 +2,8 @@ import React from 'react';
 import './../App.css';
 
 export default class TodoHeader extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     handleSubmit(e) {
@@ -19,10 +19,12 @@ export default class TodoHeader extends React.Component {
 
     render() {
         return (
-            <div className="todo-header">
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <input type="text" placeholder="Anything on mind?" ref="todoInput" />
-                    <button> Add </button>
+            <div className="row text-center">
+                <form onSubmit={this.handleSubmit.bind(this)} className="form-inline">
+                    <div className="input-group">
+                        <input className="form-control" type="text" placeholder="Anything on mind???" ref="todoInput" />
+                        <span className="input-group-btn"><button className="btn btn-default btn-success">Add</button></span>
+                    </div>
                 </form>
             </div >
         );

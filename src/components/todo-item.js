@@ -10,28 +10,9 @@ export default class TodoItem extends React.Component {
         }
     }
 
-    renderTodoNameAction() {
-        console.log('in rendor Todo Name section');
-        const { name, isComplete } = this.props;
-
-        const nameStyle = {
-            color: isComplete ? 'green' : 'red',
-            cursor: 'pointer',
-            textDecoration: isComplete ? 'line-through' : 'none'
-        };
-
-        if (this.state.isEditing) {
-            return (
-                <span>
-                    <form onSubmit={this.updateTodoName.bind(this)}>
-                        <input ref="editTodo" type="text" defaultValue={name} />
-                    </form>
-                </span>
-            );
-        }
-
+    renderName() {
         return (
-            <span style={nameStyle}> {name} </span>
+            <span className="todo-item">{this.props.name}</span>
         );
     }
 
@@ -56,7 +37,7 @@ export default class TodoItem extends React.Component {
         return (
             <span>
                 <button onClick={this.onEditClick.bind(this)}> Edit </button>
-                <button onClick={this.props.handleDelete.bind(this, this.props.id)} > Delete </button>
+                <button> Delete </button>
             </span>
         );
     }
@@ -78,12 +59,23 @@ export default class TodoItem extends React.Component {
 
     render() {
         return (
-            <li key={this.props.id}>
-                <input type="checkbox" ref="isCompleteInput" defaultChecked={this.props.isComplete}
+            <a href="#" className={
+                this.props.completed === true ? "list-group-item list-group-item-success" : "list-group-item"}
+                key={this.props.id}>
+                <input type="checkbox" ref="isCompleteInput" defaultChecked={this.props.completed}
+                    onClick={this.isCompleteClick.bind(this, this.props.id)} />
+                {this.renderName()}
+                <span className="badge" onClick={this.props.handleDelete.bind(this, this.props.id)}><span className="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+                {/*<span className="badge" >Delete</span>*/}
+            </a>
+        )
+        {/*<li key={this.props.id} className="list-group-item">
+                <input type="checkbox" ref="isCompleteInput" defaultChecked={this.props.completed}
                     onClick={this.isCompleteClick.bind(this, this.props.id)} />
                 {this.renderTodoNameAction()}
                 {this.renderActionsSection()}
-            </li>
-        )
+            </li>*/
+        }
+
     }
 }
